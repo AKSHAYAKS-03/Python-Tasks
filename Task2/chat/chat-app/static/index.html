@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chat App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Real-Time Chat App</h1>
+
+        <div class="login-box">
+            <input type="text" id="username" placeholder="Enter username">
+            <button id="connectBtn">Connect</button>
+            <p id="statusText">Not connected</p>
+        </div>
+
+        <div class="chat-box">
+            <div class="top-bar">
+                <label for="roomSelect">Room:</label>
+                <select id="roomSelect" disabled>
+                    <option value="general">general</option>
+                    <option value="python">python</option>
+                    <option value="random">random</option>
+                </select>
+            </div>
+
+            <div class="main-layout">
+                <div class="left-panel">
+                    <div id="messages" class="messages"></div>
+                    <div id="typingArea" class="typing-area"></div>
+
+                    <div class="message-input-box">
+                        <input type="text" id="messageInput" placeholder="Type a message or /dm username message" disabled>
+                        <button id="sendBtn" disabled>Send</button>
+                    </div>
+                </div>
+
+                <div class="right-panel">
+                    <h3>Online Users</h3>
+                    <ul id="userList"></ul>
+
+                    <h3>Search Messages</h3>
+                    <input type="text" id="searchKeyword" placeholder="Keyword">
+                    <input type="text" id="searchUser" placeholder="Username (optional)">
+                    <select id="searchRoom">
+                        <option value="">All rooms</option>
+                        <option value="general">general</option>
+                        <option value="python">python</option>
+                        <option value="random">random</option>
+                    </select>
+                    <button id="searchBtn" disabled>Search</button>
+
+                    <div id="searchResults" class="search-results"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="client.js"></script>
+</body>
+</html>
