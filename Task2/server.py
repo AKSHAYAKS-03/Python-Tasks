@@ -21,13 +21,12 @@ ROOMS = ["general", "python", "random"]
 AWAY_SECONDS = 60
 
 # Active users
-connected_users = {}   # username -> websocket
-user_rooms = {}        # username -> room
-user_status = {}       # username -> online/away/offline
-last_activity = {}     # username -> last active time
+connected_users = {}   
+user_rooms = {}        
+user_status = {}       
+last_activity = {}     
 
 
-# ------------------ Helper Functions ------------------
 
 async def send_json(websocket, data):
     await websocket.send(json.dumps(data))
@@ -86,7 +85,6 @@ async def set_status(username, status):
     await broadcast_user_list()
 
 
-# ------------------ Presence Watcher ------------------
 
 async def activity_watcher(username, websocket):
     while True:
@@ -104,7 +102,6 @@ async def activity_watcher(username, websocket):
             await set_status(username, "away")
 
 
-# ------------------ User Registration ------------------
 
 async def register_user(websocket, username):
     username = username.strip()
@@ -145,7 +142,6 @@ async def register_user(websocket, username):
     return username
 
 
-# ------------------ Room Join ------------------
 
 async def join_room(username, room):
     websocket = connected_users.get(username)
@@ -176,7 +172,6 @@ async def join_room(username, room):
         print(f'[INFO] {username} joined room #{room}')
 
 
-# ------------------ Room Message ------------------
 
 async def handle_room_message(username, text):
     room = user_rooms.get(username, "general")
@@ -194,7 +189,6 @@ async def handle_room_message(username, text):
     await broadcast_room_message(room, data)
 
 
-# ------------------ Direct Message ------------------
 
 async def handle_dm(username, target_user, text):
     sender_socket = connected_users.get(username)
@@ -224,7 +218,6 @@ async def handle_dm(username, target_user, text):
         await send_json(target_socket, data)
 
 
-# ------------------ Typing ------------------
 
 async def handle_typing(username, is_typing):
     room = user_rooms.get(username)
@@ -241,7 +234,6 @@ async def handle_typing(username, is_typing):
             await send_json(websocket, data)
 
 
-# ------------------ Search ------------------
 
 async def handle_search(username, keyword, room):
     websocket = connected_users.get(username)
@@ -256,7 +248,6 @@ async def handle_search(username, keyword, room):
     })
 
 
-# ------------------ Main Client Handler ------------------
 
 async def handle_client(websocket):
     username = None
@@ -265,6 +256,7 @@ async def handle_client(websocket):
     try:
         async for message_text in websocket:
             data = json.loads(message_text)
+            # string to python dict
             action = data.get("action")
 
             # Register first
@@ -345,7 +337,6 @@ async def handle_client(websocket):
             print(f'[INFO] User "{username}" disconnected')
 
 
-# ------------------ Start Server ------------------
 
 async def main():
     init_db()
