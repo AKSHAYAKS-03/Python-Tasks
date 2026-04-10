@@ -1,6 +1,4 @@
 
-import queue
-
 import redis
 
 import json

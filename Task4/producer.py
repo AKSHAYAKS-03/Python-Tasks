@@ -1,6 +1,5 @@
 import redis
 
-# Python object ah binary format ah convert panna
 import json
 
 #  Python object ah binary format ah convert panna
@@ -15,6 +14,7 @@ from config import REDIS_URL, QUEUE_NAME
 
 
 class Task:
+
     def __init__(self, func_name, args=None, kwargs=None, max_retries=3):
 
 
@@ -64,6 +64,7 @@ class Task:
         return f"<Task id={self.id[:8]} func={self.func_name} status={self.status}>"
 
 class TaskQueue:
+    
     def __init__(self):
         # Redis server connect pannrom
         # decode_responses=False because pickle bytes um store panrom So raw format safe ah irukanum

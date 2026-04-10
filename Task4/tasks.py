@@ -7,9 +7,7 @@ import time
 import random
 
 
-# ---------------------------------------------------------
-# TASK 1: Generate Thumbnail
-# ---------------------------------------------------------
+
 def generate_thumbnail(image_id, size):
     # small delay kudukrom real work maari feel varanum
     time.sleep(1.5)
@@ -18,9 +16,6 @@ def generate_thumbnail(image_id, size):
     return f"/thumbs/{image_id}_{size[0]}x{size[1]}.jpg"
 
 
-# ---------------------------------------------------------
-# TASK 2: Send Email
-# ---------------------------------------------------------
 def send_email(to, template):
     # email send aagura maari simulate pannrom
     time.sleep(1)
@@ -34,9 +29,7 @@ def send_email(to, template):
     return "email_sent"
 
 
-# ---------------------------------------------------------
-# TASK 3: Generate Report
-# ---------------------------------------------------------
+
 def generate_report(report_id):
     # report generate aagura maari small delay
     time.sleep(1)
@@ -46,9 +39,6 @@ def generate_report(report_id):
     raise Exception("ReportGenerationError")
 
 
-# ---------------------------------------------------------
-# TASK REGISTRY
-# ---------------------------------------------------------
 # function object direct Redis la safe ah store panna kashtam
 # so function name -> actual function map use panrom
 TASK_REGISTRY = {
